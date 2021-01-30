@@ -123,12 +123,6 @@
     <script>
         //First class ticket handler
         document.getElementById("first-class-plus").addEventListener("click", function(){
-            // const ticketInput = document.getElementById("first-class-quantity");
-            // const ticketQuantity = parseInt(ticketInput.value);
-            // const ticketNewQuantity = ticketQuantity + 1;
-            // ticketInput.value = ticketNewQuantity;
-            // const subTotalPrice = ticketNewQuantity * 150;
-            // document.getElementById("subtotal-price").innerText = subTotalPrice;
             handleFirstClassPrice("first", true);
         })
         document.getElementById("first-class-minus").addEventListener("click", function(){
@@ -144,22 +138,32 @@
             if(isIncrease == false && ticketQuantity > 0){
                 ticketNewQuantity = ticketQuantity - 1;
             }
-            // const ticketNewQuantity = ticketQuantity + 1;
             ticketInput.value = ticketNewQuantity;
-            const subTotalPrice = ticketNewQuantity * 150;
-            document.getElementById("subtotal-price").innerText = subTotalPrice;
+            // let subTotalPrice = 0;
+            // if(ticket == "first"){
+            //     subTotalPrice = ticketNewQuantity * 150;
+            // }
+            // if(ticket == "economy"){
+            //     subTotalPrice = ticketNewQuantity * 100;
+            // }
+            // document.getElementById("subtotal-price").innerText = subTotalPrice;
+            calculateSubTotal();
         }
         //Economy Class Ticket handler
         document.getElementById("economy-class-plus").addEventListener("click", function(){
-            // const economyTicketInput = document.getElementById("economy-class-quantity");
-            // const economyTicketQuantity = parseInt(economyTicketInput.value);
-            // const economyTicketNewQuantity = economyTicketQuantity + 1;
-            // economyTicketInput.value = economyTicketNewQuantity;
             handleFirstClassPrice("economy", true);
         })
         document.getElementById("economy-class-minus").addEventListener("click", function(){
             handleFirstClassPrice("economy", false);
         })
+        function calculateSubTotal(){
+            const firstClassTicketInput = document.getElementById("first-class-quantity");
+            const firstClassTicketQuantity = parseInt(firstClassTicketInput.value);
+            const economyClassTicketInput = document.getElementById("economy-class-quantity");
+            const economyClassTicketQuantity = parseInt(economyClassTicketInput.value);
+            const subTotalPrice = firstClassTicketQuantity * 150 + economyClassTicketQuantity * 100;
+            document.getElementById("subtotal-price").innerText = subTotalPrice;
+        }
     </script>
     <!-- Javascript end -->
 </body>
