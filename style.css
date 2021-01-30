@@ -122,12 +122,4 @@ a.active {
   display: flex;
   justify-content: space-between;
 }
-#transaction {
-  display: none;
-}
-.transaction-view {
-  margin: auto;
-  /* padding: 10px; */
-  background-color: lightgray;
-  border-radius: 10px;
-}
+

@@ -71,8 +71,8 @@
                     <input id="first-class-quantity" class="inp-style inp-width" type="number" name="" value="0">
                 </div>
                 <div>
-                    <button id="first-class-plus" onclick="handleTicketPrice('first', true)" class="btn plus-minus-btn"><i class="fas fa-plus"></i></button>
-                    <button id="first-class-minus" onclick="handleTicketPrice('first', false)" class="btn plus-minus-btn"><i class="fas fa-minus"></i></button>
+                    <button id="first-class-plus" onclick="handleTicketQuantity('first', true)" class="btn plus-minus-btn"><i class="fas fa-plus"></i></button>
+                    <button id="first-class-minus" onclick="handleTicketQuantity('first', false)" class="btn plus-minus-btn"><i class="fas fa-minus"></i></button>
                 </div>
             </div>
             
@@ -82,8 +82,8 @@
                     <input id="economy-class-quantity" class="inp-style inp-width" type="number" name="" value="0">
                 </div>
                 <div>
-                    <button id="economy-class-plus" onclick="handleTicketPrice('economy', true)" class="btn plus-minus-btn"><i class="fas fa-plus"></i></button>
-                    <button id="economy-class-minus" onclick="handleTicketPrice('economy', false)" class="btn plus-minus-btn"><i class="fas fa-minus"></i></button>
+                    <button id="economy-class-plus" onclick="handleTicketQuantity('economy', true)" class="btn plus-minus-btn"><i class="fas fa-plus"></i></button>
+                    <button id="economy-class-minus" onclick="handleTicketQuantity('economy', false)" class="btn plus-minus-btn"><i class="fas fa-minus"></i></button>
                 </div>
             </div>
             <div id="calculations" class="calculations">
@@ -114,23 +114,15 @@
                     </div>
                 </div>
             </div>
-            <!-- transaction -->
-            <!-- <div id="transaction">
-                <div class="row">
-                    <div class="transaction-view col-md-12">
-                        <p>Congratulations!</p>
-                        <p>You successfully booked your ticket</p>
-                    </div>
-                </div>
-            </div> -->
-            <button id="booking" onclick="bookingNow()" class="btn-style">Book Now</button>
+            <button onclick="bookingNow()" class="btn-style">Book Now</button>
         </div>
     </main>
 
     <!--Thank You-->
     <!-- Javascript start -->
     <script>
-        function handleTicketPrice(ticket, isIncrease){
+        //Ticket quantity increase & decrease calculation
+        function handleTicketQuantity(ticket, isIncrease){
             const ticketInput = document.getElementById(ticket + "-class-quantity");
             const ticketQuantity = parseInt(ticketInput.value);
             let ticketNewQuantity = ticketQuantity;
@@ -141,10 +133,10 @@
                 ticketNewQuantity = ticketQuantity - 1;
             }
             ticketInput.value = ticketNewQuantity;
-            calculateSubTotal();
+            calculateTotalPrice();
         }
-
-        function calculateSubTotal(){
+        //Ticket subtotal & total price calculation
+        function calculateTotalPrice(){
             const firstClassTicketQuantity = getSubTotal("first");
             const economyClassTicketQuantity = getSubTotal("economy");
             const subTotalPrice = firstClassTicketQuantity * 150 + economyClassTicketQuantity * 100;
@@ -153,6 +145,7 @@
             document.getElementById("vat-amount").innerText = vatAmount;
             const totalPrice = subTotalPrice + vatAmount;
             document.getElementById("total-price").innerText = totalPrice;
+            return totalPrice;
         }
 
         function getSubTotal(ticket){
@@ -160,15 +153,15 @@
             const ticketQuantity = parseInt(ticketInput.value);
             return ticketQuantity;
         }
-        //Book now handler
-        // document.getElementById("booking").addEventListener("click", function(){
-        //     const calculations = document.getElementById("calculations");
-        //     calculations.style.display = "none";
-        //     const transaction = document.getElementById("transaction");
-        //     transaction.style.display = "block";
-        // })
+        //Book now button click & popup
         function bookingNow(){
-            alert("congratulations!");
+            const showTotalPrice = calculateTotalPrice();
+            if(showTotalPrice > 0){
+               alert("Congratulations! you successfully booked your ticket \n your ticket price :" + " $" + showTotalPrice);
+            }
+            else{
+                alert("Sorry! you will be select minimum one ticket");
+            }
         }
     </script>
     <!-- Javascript end -->
