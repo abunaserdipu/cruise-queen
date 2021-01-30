@@ -157,12 +157,19 @@
             handleFirstClassPrice("economy", false);
         })
         function calculateSubTotal(){
-            const firstClassTicketInput = document.getElementById("first-class-quantity");
-            const firstClassTicketQuantity = parseInt(firstClassTicketInput.value);
-            const economyClassTicketInput = document.getElementById("economy-class-quantity");
-            const economyClassTicketQuantity = parseInt(economyClassTicketInput.value);
+            // const firstClassTicketInput = document.getElementById("first-class-quantity");
+            // const firstClassTicketQuantity = parseInt(firstClassTicketInput.value);
+            // const economyClassTicketInput = document.getElementById("economy-class-quantity");
+            // const economyClassTicketQuantity = parseInt(economyClassTicketInput.value);
+            const firstClassTicketQuantity = getSubTotal("first");
+            const economyClassTicketQuantity = getSubTotal("economy");
             const subTotalPrice = firstClassTicketQuantity * 150 + economyClassTicketQuantity * 100;
             document.getElementById("subtotal-price").innerText = subTotalPrice;
+        }
+        function getSubTotal(ticket){
+            const ticketInput = document.getElementById(ticket + "-class-quantity");
+            const ticketQuantity = parseInt(ticketInput.value);
+            return ticketQuantity;
         }
     </script>
     <!-- Javascript end -->
