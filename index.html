@@ -71,8 +71,8 @@
                     <input id="first-class-quantity" class="inp-style inp-width" type="number" name="" value="0">
                 </div>
                 <div>
-                    <button id="first-class-plus" onclick="handleFirstClassPrice('first', true)" class="btn plus-minus-btn"><i class="fas fa-plus"></i></button>
-                    <button id="first-class-minus" onclick="handleFirstClassPrice('first', false)" class="btn plus-minus-btn"><i class="fas fa-minus"></i></button>
+                    <button id="first-class-plus" onclick="handleTicketPrice('first', true)" class="btn plus-minus-btn"><i class="fas fa-plus"></i></button>
+                    <button id="first-class-minus" onclick="handleTicketPrice('first', false)" class="btn plus-minus-btn"><i class="fas fa-minus"></i></button>
                 </div>
             </div>
             
@@ -82,17 +82,17 @@
                     <input id="economy-class-quantity" class="inp-style inp-width" type="number" name="" value="0">
                 </div>
                 <div>
-                    <button id="economy-class-plus" onclick="handleFirstClassPrice('economy', true)" class="btn plus-minus-btn"><i class="fas fa-plus"></i></button>
-                    <button id="economy-class-minus" onclick="handleFirstClassPrice('economy', false)" class="btn plus-minus-btn"><i class="fas fa-minus"></i></button>
+                    <button id="economy-class-plus" onclick="handleTicketPrice('economy', true)" class="btn plus-minus-btn"><i class="fas fa-plus"></i></button>
+                    <button id="economy-class-minus" onclick="handleTicketPrice('economy', false)" class="btn plus-minus-btn"><i class="fas fa-minus"></i></button>
                 </div>
             </div>
-            <div class="calculations">
+            <div id="calculations" class="calculations">
                 <div class="amount">
                     <div class="left">
                         <p>Subtotal</p>
                     </div>
                     <div class="right">
-                        <p>$ <span id="subtotal-price">500</span> </p>
+                        <p>$ <span id="subtotal-price">000</span> </p>
                     </div>
                 </div>
 
@@ -101,7 +101,7 @@
                         <p>Charge 10% VAT</p>
                     </div>
                     <div class="right">
-                        <p>$ <span id="vat-amount">50</span></p>
+                        <p>$ <span id="vat-amount">00</span></p>
                     </div>
                 </div>
                 <hr>
@@ -110,33 +110,27 @@
                         <h4>Total</h4>
                     </div>
                     <div class="right">
-                        <p>$ <span id="total-price">550</span></p>
+                        <p>$ <span id="total-price">000</span></p>
                     </div>
                 </div>
             </div>
-            <button class="btn-style">Book Now</button>
+            <!-- transaction -->
+            <!-- <div id="transaction">
+                <div class="row">
+                    <div class="transaction-view col-md-12">
+                        <p>Congratulations!</p>
+                        <p>You successfully booked your ticket</p>
+                    </div>
+                </div>
+            </div> -->
+            <button id="booking" onclick="bookingNow()" class="btn-style">Book Now</button>
         </div>
     </main>
 
     <!--Thank You-->
     <!-- Javascript start -->
     <script>
-        //First class ticket handler
-        // document.getElementById("first-class-plus").addEventListener("click", function(){
-        //     handleFirstClassPrice("first", true);
-        // })
-        // document.getElementById("first-class-minus").addEventListener("click", function(){
-        //     handleFirstClassPrice("first", false);
-        // })
-        //Economy Class Ticket handler
-        // document.getElementById("economy-class-plus").addEventListener("click", function(){
-        //     handleFirstClassPrice("economy", true);
-        // })
-        // document.getElementById("economy-class-minus").addEventListener("click", function(){
-        //     handleFirstClassPrice("economy", false);
-        // })
-
-        function handleFirstClassPrice(ticket, isIncrease){
+        function handleTicketPrice(ticket, isIncrease){
             const ticketInput = document.getElementById(ticket + "-class-quantity");
             const ticketQuantity = parseInt(ticketInput.value);
             let ticketNewQuantity = ticketQuantity;
@@ -165,6 +159,16 @@
             const ticketInput = document.getElementById(ticket + "-class-quantity");
             const ticketQuantity = parseInt(ticketInput.value);
             return ticketQuantity;
+        }
+        //Book now handler
+        // document.getElementById("booking").addEventListener("click", function(){
+        //     const calculations = document.getElementById("calculations");
+        //     calculations.style.display = "none";
+        //     const transaction = document.getElementById("transaction");
+        //     transaction.style.display = "block";
+        // })
+        function bookingNow(){
+            alert("congratulations!");
         }
     </script>
     <!-- Javascript end -->
