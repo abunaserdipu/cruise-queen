@@ -71,8 +71,8 @@
                     <input id="first-class-quantity" class="inp-style inp-width" type="number" name="" value="0">
                 </div>
                 <div>
-                    <button id="first-class-plus" class="btn plus-minus-btn"><i class="fas fa-plus"></i></button>
-                    <button id="first-class-minus" class="btn plus-minus-btn"><i class="fas fa-minus"></i></button>
+                    <button id="first-class-plus" onclick="handleFirstClassPrice('first', true)" class="btn plus-minus-btn"><i class="fas fa-plus"></i></button>
+                    <button id="first-class-minus" onclick="handleFirstClassPrice('first', false)" class="btn plus-minus-btn"><i class="fas fa-minus"></i></button>
                 </div>
             </div>
             
@@ -82,8 +82,8 @@
                     <input id="economy-class-quantity" class="inp-style inp-width" type="number" name="" value="0">
                 </div>
                 <div>
-                    <button id="economy-class-plus" class="btn plus-minus-btn"><i class="fas fa-plus"></i></button>
-                    <button id="economy-class-minus" class="btn plus-minus-btn"><i class="fas fa-minus"></i></button>
+                    <button id="economy-class-plus" onclick="handleFirstClassPrice('economy', true)" class="btn plus-minus-btn"><i class="fas fa-plus"></i></button>
+                    <button id="economy-class-minus" onclick="handleFirstClassPrice('economy', false)" class="btn plus-minus-btn"><i class="fas fa-minus"></i></button>
                 </div>
             </div>
             <div class="calculations">
@@ -122,12 +122,20 @@
     <!-- Javascript start -->
     <script>
         //First class ticket handler
-        document.getElementById("first-class-plus").addEventListener("click", function(){
-            handleFirstClassPrice("first", true);
-        })
-        document.getElementById("first-class-minus").addEventListener("click", function(){
-            handleFirstClassPrice("first", false);
-        })
+        // document.getElementById("first-class-plus").addEventListener("click", function(){
+        //     handleFirstClassPrice("first", true);
+        // })
+        // document.getElementById("first-class-minus").addEventListener("click", function(){
+        //     handleFirstClassPrice("first", false);
+        // })
+        //Economy Class Ticket handler
+        // document.getElementById("economy-class-plus").addEventListener("click", function(){
+        //     handleFirstClassPrice("economy", true);
+        // })
+        // document.getElementById("economy-class-minus").addEventListener("click", function(){
+        //     handleFirstClassPrice("economy", false);
+        // })
+
         function handleFirstClassPrice(ticket, isIncrease){
             const ticketInput = document.getElementById(ticket + "-class-quantity");
             const ticketQuantity = parseInt(ticketInput.value);
@@ -139,33 +147,20 @@
                 ticketNewQuantity = ticketQuantity - 1;
             }
             ticketInput.value = ticketNewQuantity;
-            // let subTotalPrice = 0;
-            // if(ticket == "first"){
-            //     subTotalPrice = ticketNewQuantity * 150;
-            // }
-            // if(ticket == "economy"){
-            //     subTotalPrice = ticketNewQuantity * 100;
-            // }
-            // document.getElementById("subtotal-price").innerText = subTotalPrice;
             calculateSubTotal();
         }
-        //Economy Class Ticket handler
-        document.getElementById("economy-class-plus").addEventListener("click", function(){
-            handleFirstClassPrice("economy", true);
-        })
-        document.getElementById("economy-class-minus").addEventListener("click", function(){
-            handleFirstClassPrice("economy", false);
-        })
+
         function calculateSubTotal(){
-            // const firstClassTicketInput = document.getElementById("first-class-quantity");
-            // const firstClassTicketQuantity = parseInt(firstClassTicketInput.value);
-            // const economyClassTicketInput = document.getElementById("economy-class-quantity");
-            // const economyClassTicketQuantity = parseInt(economyClassTicketInput.value);
             const firstClassTicketQuantity = getSubTotal("first");
             const economyClassTicketQuantity = getSubTotal("economy");
             const subTotalPrice = firstClassTicketQuantity * 150 + economyClassTicketQuantity * 100;
             document.getElementById("subtotal-price").innerText = subTotalPrice;
+            const vatAmount = subTotalPrice * 0.1;
+            document.getElementById("vat-amount").innerText = vatAmount;
+            const totalPrice = subTotalPrice + vatAmount;
+            document.getElementById("total-price").innerText = totalPrice;
         }
+
         function getSubTotal(ticket){
             const ticketInput = document.getElementById(ticket + "-class-quantity");
             const ticketQuantity = parseInt(ticketInput.value);
